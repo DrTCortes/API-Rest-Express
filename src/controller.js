@@ -4,4 +4,20 @@ function allQuery(req, res){
     res.json(userList);
 }
 
-module.exports = {allQuery}
+function singleQuery(req, res){
+    const user = userList.find(
+        (user) => user.id == Number(req.params.idQuery)
+    );
+
+    if(!user){
+        res.status(404);
+        res.json({ error: 'Usuario ' + req.params.idQuery + ' não foi encontrado'})
+        return
+    }
+
+    res.json(user);
+}
+
+
+
+module.exports = {allQuery, singleQuery}
