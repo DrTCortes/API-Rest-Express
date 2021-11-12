@@ -4,7 +4,7 @@ let nextId = userList.length +1;
 let professoesValidas = ["logica", "ui/ux", "front-end", "back-end", "full-stack", "mobile", "soft-skills"];
 
 function validateUser(user){
-    console.log(user.nome)
+    console.log(user.profissao)
     if(!user.nome || typeof user.nome !== "string"){
         return'O campo "nome" deve ser preenchido corretamente';
     }
@@ -90,6 +90,40 @@ function modifyData(req, res){
     res.json(user);
 }
 
+function createOrModifyData(req, res){
+    const user = userList.find((user)=> user.id == Number(req.params.idQuery));
+    
+    if(user){
+        const error = validateUser({nome: req.body.nome ?? user.nome, idade: req.body.idade ?? user.idade, profissao: req.body.profissao ?? user.profissao})
+        
+        if(error){
+            res.status(400)
+            res.json({error})
+            return
+        }
+
+        user.id = req.body.id ?? user.id;
+        user.nome = req.body.nome ?? user.nome;
+        user.idade = req.body.idade ?? user.idade;
+        user.profissao = req.body.profissao ?? user.profissao;
+
+        res.json(user);
+    }else{
+        const newUser = {
+            id: nextId,
+            nome: req.body.nome,
+            idade: req.body.idade,
+            profissao: req.body.profissao
+        };
+        userList.push(newUser);
+
+
+        res.json(newUser);
+
+        nextId += 1;
+    }
+}
+
 function deleteData(req, res){
     const user = userList.find((user)=> user.id === Number(req.params.idQuery))
     
@@ -98,4 +132,4 @@ function deleteData(req, res){
     res.json(user)
 }
 
-module.exports = {allQuery, singleQuery, createData, modifyData, deleteData}
+module.exports = {allQuery, singleQuery, createData, modifyData, createOrModifyData, deleteData}
