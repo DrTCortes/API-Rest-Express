@@ -90,4 +90,12 @@ function modifyData(req, res){
     res.json(user);
 }
 
-module.exports = {allQuery, singleQuery, createData, modifyData}
+function deleteData(req, res){
+    const user = userList.find((user)=> user.id === Number(req.params.idQuery))
+    
+    if(user) userList.splice(userList.indexOf(user), 1);
+    
+    res.json(user)
+}
+
+module.exports = {allQuery, singleQuery, createData, modifyData, deleteData}
