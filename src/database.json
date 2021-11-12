@@ -2,16 +2,16 @@
     "id": 1,
     "nome": "Alex",
     "idade": 28,
-    "areaDeAtuacao": "Front-end"
+    "profissao": "Front-end"
 },{
     "id": 2,
     "nome": "Marcos",
     "idade": 37,
-    "areaDeAtuacao": "Back-end"
+    "profissao": "Back-end"
 },
 {
     "id": 3,
     "nome": "Fernanda",
     "idade": 32,
-    "areaDeAtuacao": "DBA"
+    "profissao": "DBA"
 }]

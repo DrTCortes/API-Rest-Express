@@ -4,7 +4,7 @@ let nextId = userList.length +1;
 let professoesValidas = ["logica", "ui/ux", "front-end", "back-end", "full-stack", "mobile", "soft-skills"];
 
 function validateUser(user){
-    console.log(user.profissao)
+    console.log(user.nome)
     if(!user.nome || typeof user.nome !== "string"){
         return'O campo "nome" deve ser preenchido corretamente';
     }
@@ -58,4 +58,36 @@ function createData(req, res){
     res.json(userList);
 }
 
-module.exports = {allQuery, singleQuery, createData}
+function modifyData(req, res){
+    const user = userList.find((user)=> user.id == Number(req.params.idQuery));
+
+    if(!user){
+        res.status(404);
+        res.json({ error: 'Usuario ' + req.params.idQuery + ' não foi encontrado'})
+        return
+    }
+
+    const error = validateUser({nome: req.body.nome ?? user.nome, idade: req.body.idade ?? user.idade, profissao: req.body.profissao ?? user.profissao})
+
+    if(error){
+        res.status(400)
+        res.json({error})
+        return
+    }
+
+    if(req.body.nome !== undefined){
+        user.nome = req.body.nome
+    };
+
+    if(req.body.idade !== undefined){
+        user.idade = req.body.idade
+    };
+
+    if(req.body.profissao !== undefined){
+        user.profissao = req.body.profissao
+    };
+
+    res.json(user);
+}
+
+module.exports = {allQuery, singleQuery, createData, modifyData}
