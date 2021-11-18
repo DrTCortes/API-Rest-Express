@@ -1,0 +1,25 @@
+{
+  "name": "api-rest-express",
+  "version": "1.0.0",
+  "description": "Estudo sobre API Rest utilizando Express.",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.15"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DrTCortes/API-Rest-Express.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DrTCortes/API-Rest-Express/issues"
+  },
+  "homepage": "https://github.com/DrTCortes/API-Rest-Express#readme"
+}
