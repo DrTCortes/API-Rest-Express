@@ -2,16 +2,16 @@ const express = require("express");
 const axios = require("axios")
 const app = express();
 
-app.get("/descricao/:pacote", (req, res)=>{
-    const pacote = req.params.pacote;
+app.get("/descricao/:pacote", async (req, res)=>{
+    const peckage = req.params.peckage;
 
-    axios.get(`https://registry.npmjs.com/${pacote}`).then((response)=>{
-        res.json({
-            nome: `Descrição do pacote: '${pacote}'`,
-            descricao: response.data.description
-        })
-    });
-})
+    response = await axios.get(`https://registry.npmjs.com/${peckage}`);
+    
+    res.json({
+        name: `Descrição do pacote: '${peckage}'`,
+        description: response.data.description
+    })
+});
 
 
 module.exports = app
